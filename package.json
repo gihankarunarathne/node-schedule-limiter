@@ -1,0 +1,31 @@
+{
+  "name": "schedule-limiter",
+  "version": "0.0.1",
+  "description": "A generic Schedule rate limiter for NodeJS. Useful for API clients and sms, email, notification daemons which tasks that need to be throttled.",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gihankarunarathne/node-schedule-limiter.git"
+  },
+  "keywords": [
+    "schedule",
+    "rate",
+    "limiter",
+    "es6"
+  ],
+  "author": "Gihan Karunarathne <gckarunarathne@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gihankarunarathne/node-schedule-limiter/issues"
+  },
+  "homepage": "https://github.com/gihankarunarathne/node-schedule-limiter#readme",
+  "engines" : {
+    "node" : ">=4.0.0"
+  },
+  "dependencies": {
+    "redis": "^2.4.2"
+  }
+}
