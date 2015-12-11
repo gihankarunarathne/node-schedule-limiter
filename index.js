@@ -4,6 +4,6 @@
 
 'use strict';
 
-let ScheduleLimiter = require('./lib/schedule-limiter');
+let debug = require('debug')('ScheduleLimiter:lib:Index');
 
-export default ScheduleLimiter;
+exports.ScheduleLimiter = require('./lib/ScheduleLimiter.js');
