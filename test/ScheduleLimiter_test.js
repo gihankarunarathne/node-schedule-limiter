@@ -56,7 +56,7 @@ describe('ScheduleLimiter ', () => {
         });
     }); // END - setLimit
 
-    describe('isExceed ', () => {
+    describe('createSchedule ', () => {
         it('should block after limit exceeds ', done => {
             const id = 1;
             const tokens = {
