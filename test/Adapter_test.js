@@ -48,7 +48,9 @@ describe('Adapter ', () => {
                     '4': 8
                 }
             };
-            const months = {'2015': ['1', '2','3']};
+            const months = {
+                '2015': ['1', '2', '3']
+            };
             adapter.increaseValues(id, tokens).then(values => {
                 assert.equal(values['2015']['1'], 5);
                 assert.equal(values['2015']['2'], 6);
@@ -60,6 +62,25 @@ describe('Adapter ', () => {
                 });
             }).catch(err => {
 
+            });
+        });
+    });
+
+    describe('getUsage ', () => {
+        it('should return usage', done => {
+            const id = 1000;
+            const months = {
+                '2015': ['1', '2', '3']
+            };
+
+            adapter.getUsage(id, months).then(usage => {
+                debug('usage: ', usage);
+                assert.equal(usage['2015']['1'], 0);
+                assert.equal(usage['2015']['2'], 0);
+                assert.equal(usage['2015']['3'], 0);
+                done();
+            }).catch(err => {
+                assert.ifError(err);
             });
         });
     });
