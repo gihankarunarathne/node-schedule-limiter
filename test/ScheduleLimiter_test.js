@@ -27,9 +27,9 @@ describe('ScheduleLimiter ', () => {
 
     beforeEach(done => {
         let redisClient = require('redis').
-                createClient(testConf.database.options);
+        createClient(testConf.database.options);
         redisClient.on('ready', () => {
-            redisClient.flushall((err)=> {
+            redisClient.flushall((err) => {
                 assert.ifError(err);
                 done();
             });
@@ -57,15 +57,22 @@ describe('ScheduleLimiter ', () => {
     }); // END - setLimit
 
     describe('isExceed ', () => {
-        it.only('should block after limit exceeds ', done => {
+        it('should block after limit exceeds ', done => {
             const id = 1;
-            const tokens = {'Jan': 5, 'feb': 6, 3: 7, '4': 8};
+            const tokens = {
+                '2015': {
+                    'Jan': 5,
+                    'feb': 6,
+                    3: 7,
+                    '4': 8
+                }
+            };
             limiter.setLimit(id, 10).then(limit => {
                 limiter.isExceed(id, tokens).then(usage => {
-                    assert.equal(usage['1'], 5);
-                    assert.equal(usage['2'], 6);
-                    assert.equal(usage['3'], 7);
-                    assert.equal(usage['4'], 8);
+                    assert.equal(usage['2015']['1'], 5);
+                    assert.equal(usage['2015']['2'], 6);
+                    assert.equal(usage['2015']['3'], 7);
+                    assert.equal(usage['2015']['4'], 8);
                     done();
                 });
             });
@@ -75,5 +82,81 @@ describe('ScheduleLimiter ', () => {
     describe('cancelSchedule ', () => {
 
     }); // END - cancelSchedule
+
+    describe('_formatMonths ', () => {
+        it('should format months to common number format ', done => {
+            const tokens = {
+                '2015': {
+                    'Jan': 5,
+                    'feb': 6,
+                    3: 7
+                },
+                '2016': {
+                    '4': 8
+                }
+            };
+            const formattedTokens = limiter._formatMonths(tokens);
+            assert.equal(formattedTokens['2015']['1'], 5);
+            assert.equal(formattedTokens['2015']['2'], 6);
+            assert.equal(formattedTokens['2015']['3'], 7);
+            assert.equal(formattedTokens['2016']['4'], 8);
+            done();
+        });
+    }); // END - _formatMonths
+
+    describe('_isExceed ', () => {
+        it('should return true if not exceeds ', done => {
+            const limit = 10;
+            const usage = {
+                '2015': {
+                    '1': 5,
+                    '2': 6,
+                    '3': 7
+                },
+                '2016': {
+                    '4': 8
+                }
+            };
+            const tokens = {
+                '2015': {
+                    '1': 5,
+                    '2': 4,
+                    '3': 3
+                },
+                '2016': {
+                    '4': 2
+                }
+            };
+            assert.ok(limiter._isExceed(limit, usage).state);
+            done();
+        });
+
+        it.only('should return false if exceeds ', done => {
+            const limit = 10;
+            const usage = {
+                '2015': {
+                    '1': 5,
+                    '2': 5,
+                    '3': 5
+                },
+                '2016': {
+                    '4': 5
+                }
+            };
+            const tokens = {
+                '2015': {
+                    '1': 5,
+                    '2': 6,
+                    '3': 11
+                },
+                '2016': {
+                    '4': 8
+                }
+            };
+            console.log(limiter._isExceed(limit, usage, tokens));
+            assert.ok(!limiter._isExceed(limit, usage, tokens)state);
+            done();
+        });
+    });
 
 }); // END - ScheduleLimiter
