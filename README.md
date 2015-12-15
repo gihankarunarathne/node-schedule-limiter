@@ -5,7 +5,7 @@ A generic Schedule rate limiter for NodeJS. Useful for API clients and sms, emai
 
 Use NPM to install using;
 
-`npm install schedule-limiter`
+`npm install schedule-limiter --save`
 
 ## Getting Started
 
