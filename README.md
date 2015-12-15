@@ -75,15 +75,15 @@ let limiter = new ScheduleLimiter({
 Set the limit against particular id. Then this limit will consider as
 limit for every month
 
-#### Parameters
-**id** : *{Integer/String}* ID (appId or userId) which want to limit
-**limit** : *{Integer}* Limit value
+###### Parameters
+- **id** : *{Integer/String}* ID (appId or userId) which want to limit
+- **limit** : *{Integer}* Limit value
 
 ### getLimit(id)
 Get the stored limit against particular ID
 
-#### Parameters
-**id** : *{Integer/String}* ID (appId or userId) which want to limit
+###### Parameters
+- **id** : *{Integer/String}* ID (appId or userId) which want to limit
 
 #### Return
 *{Integer}* Limit value
@@ -92,49 +92,42 @@ Get the stored limit against particular ID
 Set the limit against particular id. Then this limit will consider as
 limit for every month
 
-#### Parameters
-**limit** : *{Array}* Array of limit Objects s.t.
-[{'userId': 1000}, {'userId2: 500}, ...]
+###### Parameters
+- **limit** : *{Array}* Array of limit Objects s.t. [{'userId': 1000}, {'userId2: 500}, ...]
 
 ### createSchedule(id, tokens [,force])
 Increase the usage value of given set of months against particular ID.
 If successfully increase the values, return values after increment.
 Otherwise rollback to previous state and return an error.
 
-#### Parameters
-**id** : *{Integer/String}* ID (appId or userId) which want to limit
-**tokens** : *{Object}* Number of tokens which want to use s.t.
-{'2015': {'Jan': 10, 'feb': 15, 3: 20, '4': 30}, '2016': {'1': 40}}
+###### Parameters
+- **id** : *{Integer/String}* ID (appId or userId) which want to limit
+- **tokens** : *{Object}* Number of tokens which want to use s.t. {'2015': {'Jan': 10, 'feb': 15, 3: 20, '4': 30}, '2016': {'1': 40}}
 
 #### Return
-*{Object}* Remaining limits for each month s.t.
-{'2015': {'1': 10, '2': 15, '3': 20, '4': 30}, '2016': {'1': 40}}
+*{Object}* Remaining limits for each month s.t. {'2015': {'1': 10, '2': 15, '3': 20, '4': 30}, '2016': {'1': 40}}
 
 ### cancelSchedule(id, tokens [,force])
 Increase the usage value of given set of months against particular ID.
 If successfully increase the values, return values after increment.
 Otherwise rollback to previous state and return an error.
 
-#### Parameters
-**id** : *{Integer/String}* ID (appId or userId) which want to limit
-**tokens** : *{Object}* Number of tokens which want to use s.t.
-{'2015': {'Jan': 10, 'feb': 15, 3: 20, '4': 30}, '2016': {'1': 40}}
+###### Parameters
+- **id** : *{Integer/String}* ID (appId or userId) which want to limit
+- **tokens** : *{Object}* Number of tokens which want to use s.t. {'2015': {'Jan': 10, 'feb': 15, 3: 20, '4': 30}, '2016': {'1': 40}}
 
 #### Return
-*{Object}* Remaining limits for each month s.t.
-{'2015': {'1': 10, '2': 15, '3': 20, '4': 30}, '2016': {'1': 40}}
+*{Object}* Remaining limits for each month s.t. {'2015': {'1': 10, '2': 15, '3': 20, '4': 30}, '2016': {'1': 40}}
 
 ### getUsage(id, months)
 Get the current usage (used tokens) against a particular id.
 
-#### Parameters
-**id** : *{Integer/String}* ID (appId or userId) which want to limit
-**months** : *{Object}* Object which contains Months Array s.t.
-{'2015': ['Jan', 'feb', 3, '4']}
+###### Parameters
+- **id** : *{Integer/String}* ID (appId or userId) which want to limit
+- **months** : *{Object}* Object which contains Months Array s.t. {'2015': ['Jan', 'feb', 3, '4']}
 
 #### Return
-*{Object}* Remaining limits for each month s.t.
-{'2015': {'1': 10, '2': 15, '3': 20, '4': 30}}
+*{Object}* Remaining limits for each month s.t. {'2015': {'1': 10, '2': 15, '3': 20, '4': 30}}
 
 ## License
 
