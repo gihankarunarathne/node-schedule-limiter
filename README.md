@@ -85,7 +85,7 @@ Get the stored limit against particular ID
 ###### Parameters
 - **id** : *{Integer/String}* ID (appId or userId) which want to limit
 
-#### Return
+###### Return
 *{Integer}* Limit value
 
 ### setLimits(limits)
@@ -104,7 +104,7 @@ Otherwise rollback to previous state and return an error.
 - **id** : *{Integer/String}* ID (appId or userId) which want to limit
 - **tokens** : *{Object}* Number of tokens which want to use s.t. {'2015': {'Jan': 10, 'feb': 15, 3: 20, '4': 30}, '2016': {'1': 40}}
 
-#### Return
+###### Return
 *{Object}* Remaining limits for each month s.t. {'2015': {'1': 10, '2': 15, '3': 20, '4': 30}, '2016': {'1': 40}}
 
 ### cancelSchedule(id, tokens [,force])
@@ -116,7 +116,7 @@ Otherwise rollback to previous state and return an error.
 - **id** : *{Integer/String}* ID (appId or userId) which want to limit
 - **tokens** : *{Object}* Number of tokens which want to use s.t. {'2015': {'Jan': 10, 'feb': 15, 3: 20, '4': 30}, '2016': {'1': 40}}
 
-#### Return
+###### Return
 *{Object}* Remaining limits for each month s.t. {'2015': {'1': 10, '2': 15, '3': 20, '4': 30}, '2016': {'1': 40}}
 
 ### getUsage(id, months)
@@ -126,7 +126,7 @@ Get the current usage (used tokens) against a particular id.
 - **id** : *{Integer/String}* ID (appId or userId) which want to limit
 - **months** : *{Object}* Object which contains Months Array s.t. {'2015': ['Jan', 'feb', 3, '4']}
 
-#### Return
+###### Return
 *{Object}* Remaining limits for each month s.t. {'2015': {'1': 10, '2': 15, '3': 20, '4': 30}}
 
 ## License
