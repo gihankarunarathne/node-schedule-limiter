@@ -47,8 +47,8 @@ describe('ScheduleLimiter ', () => {
 
     describe('getLimit ', () => {
         it('should set limits ', done => {
-            limiter.setLimit(10, 10).then(limit => {
-                limiter.getLimit(10).then(limit => {
+            limiter.setLimit(1, 10).then(limit => {
+                limiter.getLimit(1).then(limit => {
                     assert.equal(limit, 10);
                     done();
                 });
@@ -57,7 +57,19 @@ describe('ScheduleLimiter ', () => {
     }); // END - setLimit
 
     describe('isExceed ', () => {
-
+        it.only('should block after limit exceeds ', done => {
+            const id = 1;
+            const tokens = {'Jan': 5, 'feb': 6, 3: 7, '4': 8};
+            limiter.setLimit(id, 10).then(limit => {
+                limiter.isExceed(id, tokens).then(usage => {
+                    assert.equal(usage['1'], 5);
+                    assert.equal(usage['2'], 6);
+                    assert.equal(usage['3'], 7);
+                    assert.equal(usage['4'], 8);
+                    done();
+                });
+            });
+        });
     }); // END - isExceed
 
     describe('cancelSchedule ', () => {
