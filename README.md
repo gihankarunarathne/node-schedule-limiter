@@ -47,13 +47,13 @@ limiter.cancelSchedule(id, {'2015': {'Dec': 50}, '2016': {'Jan': 60}})
 
 Following methods are available in Schedule Limiter;
 
-1. constructor
-2. setLimit(id, limit)
-3. getLimit(id)
-4. setLimits(limits)
-5. createSchedule(id, tokens [,force])
-6. cancelSchedule(id, tokens [,force])
-7. getUsage(id, months)
+1. [constructor](#constructor)
+2. [setLimit(id, limit)](#setlimitid-limit)
+3. [getLimit(id)](#getlimitid)
+4. [setLimits(limits)](#setlimitslimits)
+5. [createSchedule(id, tokens \[,force\])](#createscheduleid-tokens-force)
+6. [cancelSchedule(id, tokens \[,force\])](#cancelscheduleid-tokens-force)
+7. [getUsage(id, months)](#getusageid-months))
 
 ### constructor
 Create new instance of Schedule Limiter
