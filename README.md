@@ -131,6 +131,6 @@ Get the current usage (used tokens) against a particular id.
 
 ## License
 
-This Software is licensed under [MIT License](/blob/master/LICENSE)
+This Software is licensed under [MIT License](/LICENSE)
 
 Copyright (c) 2015 Gihan Karunarathne <gckarunarathne@gmail.com>
