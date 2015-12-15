@@ -68,7 +68,8 @@ describe('ScheduleLimiter ', () => {
                 }
             };
             limiter.setLimit(id, 10).then(limit => {
-                limiter.isExceed(id, tokens).then(usage => {
+                limiter.createSchedule(id, tokens).then(usage => {
+                    debug('usage ', usage);
                     assert.equal(usage['2015']['1'], 5);
                     assert.equal(usage['2015']['2'], 6);
                     assert.equal(usage['2015']['3'], 7);
@@ -127,11 +128,11 @@ describe('ScheduleLimiter ', () => {
                     '4': 2
                 }
             };
-            assert.ok(limiter._isExceed(limit, usage).state);
+            assert.ok(limiter._isExceed(limit, usage, tokens).state);
             done();
         });
 
-        it.only('should return false if exceeds ', done => {
+        it('should return false if exceeds ', done => {
             const limit = 10;
             const usage = {
                 '2015': {
@@ -154,7 +155,7 @@ describe('ScheduleLimiter ', () => {
                 }
             };
             console.log(limiter._isExceed(limit, usage, tokens));
-            assert.ok(!limiter._isExceed(limit, usage, tokens)state);
+            assert.ok(!limiter._isExceed(limit, usage, tokens).state);
             done();
         });
     });
