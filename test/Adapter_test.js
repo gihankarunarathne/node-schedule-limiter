@@ -85,4 +85,59 @@ describe('Adapter ', () => {
         });
     });
 
+    describe('decreaseValues ', () => {
+        it.only('should decrease values', done => {
+            const id = 1000;
+            const tokens = {
+                '2015': {
+                    '1': 15,
+                    '2': 16,
+                    '3': 21
+                },
+                '2016': {
+                    '4': 18
+                }
+            };
+            const decreaseTokens = {
+                '2015': {
+                    '1': 5,
+                    '2': 6,
+                    '3': 11
+                },
+                '2016': {
+                    '4': 8
+                }
+            };
+            const months = {
+                '2015': ['1', '2', '3']
+            };
+            adapter.increaseValues(id, tokens).then(values => {
+                debug('values: ', values);
+                assert.equal(values['2015']['1'], 15);
+                adapter.getUsage(id, months).then(usage => {
+                    debug('usage: ', usage);
+                    assert.equal(usage['2015']['1'], 15);
+                    adapter.decreaseValues(id, decreaseTokens).
+                    then(values2 => {
+                        debug('values2: ', values2);
+                        assert.equal(values2['2015']['1'], 10);
+                        adapter.getUsage(id, months).then(usage2 => {
+                            debug('usage2: ', usage2);
+                            assert.equal(usage2['2015']['1'], 10);
+                            done();
+                        }).catch(err => {
+                            assert.ifError(err);
+                        });
+                    }).catch(err => {
+                        assert.ifError(err);
+                    });
+                }).catch(err => {
+                    assert.ifError(err);
+                });
+            }).catch(err => {
+                assert.ifError(err);
+            });
+        });
+    });
+
 });
