@@ -86,7 +86,7 @@ describe('Adapter ', () => {
     });
 
     describe('decreaseValues ', () => {
-        it.only('should decrease values', done => {
+        it('should decrease values', done => {
             const id = 1000;
             const tokens = {
                 '2015': {

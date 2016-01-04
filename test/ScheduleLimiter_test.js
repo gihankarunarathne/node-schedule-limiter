@@ -57,7 +57,7 @@ describe('ScheduleLimiter ', () => {
     }); // END - setLimit
 
     describe('createSchedule ', () => {
-        it('should block after limit exceeds ', done => {
+        it('should create a schedule ', done => {
             const id = 1;
             const tokens = {
                 '2015': {
@@ -75,6 +75,36 @@ describe('ScheduleLimiter ', () => {
                     assert.equal(usage['2015']['3'], 7);
                     assert.equal(usage['2015']['4'], 8);
                     done();
+                });
+            });
+        });
+
+        it('should block after limit exceeds ', done => {
+            const id = 2;
+            const tokens = {
+                '2015': {
+                    'Jan': 5,
+                    'feb': 6,
+                    3: 7,
+                    '4': 8
+                }
+            };
+            limiter.setLimit(id, 10).then(limit => {
+                limiter.createSchedule(id, tokens).then(usage => {
+                    debug('1. usage ', usage);
+                    assert.equal(usage['2015']['1'], 5);
+                    assert.equal(usage['2015']['2'], 6);
+                    assert.equal(usage['2015']['3'], 7);
+                    assert.equal(usage['2015']['4'], 8);
+                    limiter.createSchedule(id, tokens).then(usage => {
+                        debug('2. usage ', usage);
+                    }).catch(err => {
+                        assert.ifError(!err);
+                        done();
+                    });
+                }).catch(err => {
+                    assert.ifError(err);
+                    console.error(err);
                 });
             });
         });
